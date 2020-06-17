@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import Bookshelf from './components/Bookshelf';
+import * as booksApi from "./BooksAPI";
 
 class BooksApp extends React.Component {
 	state = {
@@ -13,9 +14,30 @@ class BooksApp extends React.Component {
 		 * pages, as well as provide a good URL they can bookmark and share.
 		 */
 		showSearchPage: false,
+		shelves: []
+	}
+
+	componentDidMount = async () => {
+		const books = await booksApi.getAll();
+		const shelves = {};
+
+		for (let i = 0; i < books.length; i++) {
+			const book = books[i];
+			
+			// Create a new bookshelf if the book's shelf doesn't exist
+			if (!shelves[book.shelf]) shelves[book.shelf] = [];
+
+			// Add the new book to it's shelf
+			shelves[book.shelf].push(book);
+		}
+
+		this.setState({
+			shelves
+		});
 	}
 
 	render() {
+		const { books } = this.state;
 		return (
 			<div className="app">
 				<Header showSearch={false} />
@@ -27,7 +49,7 @@ class BooksApp extends React.Component {
 					<div className="list-books">
 						<div className="list-books-content">
 							<div>
-								<Bookshelf title="Currently Reading" books={[]} />
+								<Bookshelf title="Currently Reading" books={ [] } />
 								
 								<div className="bookshelf">
 									<h2 className="bookshelf-title">Want to Read</h2>
