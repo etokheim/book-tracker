@@ -19,18 +19,30 @@ class BooksApp extends React.Component {
 
 	componentDidMount = async () => {
 		const books = await booksApi.getAll();
-		const shelves = {};
+		const shelves = [];
 
 		for (let i = 0; i < books.length; i++) {
 			const book = books[i];
 			
-			// Create a new bookshelf if the book's shelf doesn't exist
-			if (!shelves[book.shelf]) shelves[book.shelf] = [];
+			// Search for the bookshelf the new book belongs to
+			let shelf = shelves.find( (shelf) => shelf.name === book.shelf);
 
-			// Add the new book to it's shelf
-			shelves[book.shelf].push(book);
+			// If we couldn't find the shelf, create it
+			if(!shelf) {
+				console.log("Couldn't find shelf, creating new for", book.shelf);
+				shelves.push({
+					name: book.shelf,
+					books: []
+				})
+
+				shelf = shelves[shelves.length - 1];
+			}
+
+			// Add the book to the shelf
+			shelf.books.push(book);
 		}
 
+		// Add the shelves to state
 		this.setState({
 			shelves
 		});
