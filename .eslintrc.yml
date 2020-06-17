@@ -1,0 +1,26 @@
+env:
+  browser: true
+  es2020: true
+extends:
+  - 'plugin:react/recommended'
+  - airbnb
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 11
+  sourceType: module
+plugins:
+  - react
+rules:
+  # Switch to the superior tab indentation style
+  indent:
+    - error
+    - tab
+  
+  # Stop displaying annoying errors while I'm working.
+  no-unused-vars:
+    - off
+  no-console:
+    - off
+  no-tabs:
+    - off
