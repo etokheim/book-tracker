@@ -24,3 +24,8 @@ rules:
     - off
   no-tabs:
     - off
+  react/jsx-filename-extension:
+    - off
+  react/jsx-indent:
+    - error
+    - tab
