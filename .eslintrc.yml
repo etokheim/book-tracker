@@ -29,3 +29,5 @@ rules:
   react/jsx-indent:
     - error
     - tab
+  max-len:
+    - off
