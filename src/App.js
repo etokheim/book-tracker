@@ -29,7 +29,6 @@ class BooksApp extends React.Component {
 
 			// If we couldn't find the shelf, create it
 			if(!shelf) {
-				console.log("Couldn't find shelf, creating new for", book.shelf);
 				shelves.push({
 					name: book.shelf,
 					books: []
@@ -61,7 +60,7 @@ class BooksApp extends React.Component {
 					<div className="list-books">
 						<div className="list-books-content">
 							{ shelves.map( (shelf) => (
-								<Bookshelf title={ shelf.name } books={ shelf.books } />
+								<Bookshelf title={ shelf.name } books={ shelf.books } key={ shelf.name } />
 							)) }
 						</div>
 						<div className="open-search">
