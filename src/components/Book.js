@@ -40,7 +40,7 @@ export default class Book extends Component {
 						</div>
 					</div>
 					<div className="book-title">{ book.title }</div>
-					<div className="book-authors">{ book.authors.map( (author, index) => {
+					<div className="book-authors">{ book.authors ? book.authors.map( (author, index) => {
 						// Format multiple authors (separate with commas and "and")
 						if(index > 0 && index + 1 === book.authors.length) {
 							// If last author (and not the first), then prepend "and"
@@ -52,7 +52,7 @@ export default class Book extends Component {
 							// Else, just return the author
 							return author
 						}
-					}) }</div>
+					}) : "" }</div>
 				</div>
 			</li>
 		)
