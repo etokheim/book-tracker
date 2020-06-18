@@ -23,18 +23,18 @@ export default class Book extends Component {
 	}
 
 	render() {
-		const { book, shelf } = this.props;
+		const { book } = this.props;
 		return (
 			<li>
 				<div className="book">
 					<div className="book-top">
 						<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks ? book.imageLinks.thumbnail : ''}")` }} />
 						<div className="book-shelf-changer">
-							<select onChange={ this.handleMoveBookLocal } value={ shelf }>
+							<select onChange={ this.handleMoveBookLocal } value={ book.shelf }>
 								<option value="move" disabled>Move to...</option>
-								<option value="currentlyReading">Currently Reading</option>
-								<option value="wantToRead">Want to Read</option>
-								<option value="read">Read</option>
+								<option value="currentlyReading" disabled={ book.shelf === "currentlyReading" ? true : false }>Currently Reading</option>
+								<option value="wantToRead" disabled={ book.shelf === "wantToRead" ? true : false }>Want to Read</option>
+								<option value="read" disabled={ book.shelf === "read" ? true : false }>Read</option>
 								<option value="none">None</option>
 							</select>
 						</div>
