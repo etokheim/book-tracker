@@ -3,11 +3,13 @@ import { Route, Link } from "react-router-dom";
 import './App.css';
 import Header from './components/Header';
 import Bookshelf from './components/Bookshelf';
+import SearchResults from './components/SearchResults';
 import * as booksApi from "./BooksAPI";
 
 class BooksApp extends React.Component {
 	state = {
-		shelves: []
+		shelves: [],
+		showSearch: false
 	}
 
 	componentDidMount = async () => {
@@ -73,11 +75,17 @@ class BooksApp extends React.Component {
 		// TODO: Move the book on the server side as well
 	}
 
+	toggleSearch = (newState) => {
+		this.setState({
+			showSearch: newState || !this.state.showSearch
+		})
+	}
+
 	render() {
-		const { shelves } = this.state;
+		const { shelves, showSearch } = this.state;
 		return (
 			<div className="app">
-				<Header showSearch={false} />
+				<Header showSearch={ showSearch } />
 				<Route exact path="/" render={() => (
 					<div className="list-books">
 						<div className="list-books-content">
@@ -94,9 +102,7 @@ class BooksApp extends React.Component {
 				)} />
 
 				<Route path="/search" render={() => (
-					<div className="search-books-results">
-						<ol className="books-grid" />
-					</div>
+					<SearchResults toggleSearch={ this.toggleSearch } />
 				)} />
 			</div>
 		);
