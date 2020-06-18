@@ -69,7 +69,9 @@ class BooksApp extends React.Component {
 		newBook.shelf = newShelfId;
 
 		// Put the book in the new shelf
-		shelf.books.push(newBook);
+		if(newShelfId !== "none") {
+			shelf.books.push(newBook);
+		}
 
 		this.setState({
 			shelves: filteredShelves
