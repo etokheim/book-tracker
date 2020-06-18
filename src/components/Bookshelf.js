@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes, { string } from 'prop-types'
+import PropTypes from 'prop-types'
 import Book from "./Book"
 
 export default class Bookshelf extends Component {

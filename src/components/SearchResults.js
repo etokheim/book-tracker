@@ -22,7 +22,7 @@ export default class SearchResults extends Component {
 	}
 
 	handleSearchInput = async (query) => {
-		const searchResults = await booksApi.search(query);
+		let searchResults = await booksApi.search(query);
 
 		// The API returns nothing when it receives an empty query...
 		if(!searchResults) {
