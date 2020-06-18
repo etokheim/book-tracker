@@ -32,7 +32,7 @@ export default class Header extends Component {
 									However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 									you don't find a specific author or title. Every search is limited by search terms.
 								*/}
-								<input onChange={ this.handleSearchInputLocal } type="text" placeholder="Search by title or author" />
+								<input onChange={ this.handleSearchInputLocal } type="text" placeholder="Search by title or author" autoFocus />
 
 							</div>
 						</div>
