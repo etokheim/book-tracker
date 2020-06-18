@@ -9,7 +9,8 @@ import * as booksApi from "./BooksAPI";
 class BooksApp extends React.Component {
 	state = {
 		shelves: [],
-		showSearch: false
+		showSearch: false,
+		searchInputHooks: []
 	}
 
 	componentDidMount = async () => {
@@ -81,11 +82,26 @@ class BooksApp extends React.Component {
 		})
 	}
 
+	/*
+		Registers a new function which wants to be triggered when the header receives input.
+		We want to do it this way, because it lets us transform the header into a search header
+		without replacing or overlaying it. This gives us extra flexibility if we want to
+		animate it.
+	*/
+	registerSearchInputHook = (hook) => {
+		const hooks = this.state.searchInputHooks;
+		hooks.push(hook);
+
+		this.setState({
+			searchInputHooks: hooks
+		})
+	}
+
 	render() {
-		const { shelves, showSearch } = this.state;
+		const { shelves, showSearch, searchQuery, searchInputHooks } = this.state;
 		return (
 			<div className="app">
-				<Header showSearch={ showSearch } />
+				<Header showSearch={ showSearch } handleSearchInput={ this.handleSearchInput } searchInputHooks={ searchInputHooks } />
 				<Route exact path="/" render={() => (
 					<div className="list-books">
 						<div className="list-books-content">
@@ -102,7 +118,7 @@ class BooksApp extends React.Component {
 				)} />
 
 				<Route path="/search" render={() => (
-					<SearchResults toggleSearch={ this.toggleSearch } />
+					<SearchResults searchQuery={ searchQuery } toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } />
 				)} />
 			</div>
 		);

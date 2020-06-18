@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Header extends Component {
+	handleSearchInputLocal = (event) => {
+		// Trigger all hooks listening for changes in the search input and
+		// give them the new input through the first parameter.
+		this.props.searchInputHooks.forEach(hook => {
+			hook(event.target.value);
+		});
+	}
+	
+	static propTypes = {
+		showSearch: PropTypes.bool.isRequired,
+		searchInputHooks: PropTypes.array.isRequired
+	}
+
 	render() {
 		const { showSearch } = this.props;
 		return (
@@ -19,7 +32,7 @@ export default class Header extends Component {
 									However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 									you don't find a specific author or title. Every search is limited by search terms.
 								*/}
-								<input type="text" placeholder="Search by title or author" />
+								<input onChange={ this.handleSearchInputLocal } type="text" placeholder="Search by title or author" />
 
 							</div>
 						</div>
@@ -33,7 +46,3 @@ export default class Header extends Component {
 		);
 	}
 }
-
-Header.propTypes = {
-	showSearch: PropTypes.bool.isRequired,
-};
