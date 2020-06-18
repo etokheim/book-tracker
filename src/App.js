@@ -47,12 +47,13 @@ class BooksApp extends React.Component {
 		});
 	}
 
-	handleMoveBook = (book, newShelfId) => {
+	handleMoveBook = async (book, newShelfId, undoDueToError) => {
 		const { shelves } = this.state;
 		const newBook = book;
+		const oldShelf = book.shelf;
 
 		// Map over the shelves to find the book we are moving.
-		const filteredShelves = shelves.map( (shelf) => {
+		const updatedShelves = shelves.map( (shelf) => {
 			// Filter the books to remove the moved book
 			shelf.books = shelf.books.filter( book => book.id !== newBook.id)
 			return shelf;
@@ -70,10 +71,23 @@ class BooksApp extends React.Component {
 		}
 
 		this.setState({
-			shelves: filteredShelves
+			shelves: updatedShelves
 		})
 
-		// TODO: Move the book on the server side as well
+		// If undo is true, it means this book failed to be moved on the server side, therefor
+		// there is no reason to move it back, as it's already there.
+		if(!undoDueToError) {
+			// Move the book on the server side as well
+			const update = await booksApi.update(newBook, newShelfId);
+	
+			// Handle any errors
+			if(update.error) {
+				console.error(update.error);
+	
+				// Move the book back in order to stay in sync with the server
+				this.handleMoveBook(newBook, oldShelf, true);
+			}
+		}
 	}
 
 	toggleSearch = (newState) => {
