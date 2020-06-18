@@ -118,7 +118,7 @@ class BooksApp extends React.Component {
 				)} />
 
 				<Route path="/search" render={() => (
-					<SearchResults searchQuery={ searchQuery } toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } />
+					<SearchResults searchQuery={ searchQuery } toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } handleMoveBook={ this.handleMoveBook } />
 				)} />
 			</div>
 		);

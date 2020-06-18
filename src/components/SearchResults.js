@@ -44,10 +44,11 @@ export default class SearchResults extends Component {
 
 	render() {
 		const { searchResults } = this.state;
+		const { handleMoveBook } = this.props;
 		return (
 			<div className="search-books-results">
 				{searchResults.map( book => (
-					<Book handleMoveBook={ () => {} } book={ book } key={ book.id } />
+					<Book handleMoveBook={ handleMoveBook } book={ book } key={ book.id } />
 				))}
 			</div>
 		)
