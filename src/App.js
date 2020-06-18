@@ -111,6 +111,15 @@ class BooksApp extends React.Component {
 		})
 	}
 
+	unregisterSearchInputHook = (hookToRemove) => {
+		const hooks = this.state.searchInputHooks;
+		const newHooks = hooks.filter( hook => hook !== hookToRemove );
+
+		this.setState({
+			searchInputHooks: newHooks
+		})
+	}
+
 	render() {
 		const { shelves, showSearch, searchQuery, searchInputHooks } = this.state;
 		return (
@@ -132,7 +141,7 @@ class BooksApp extends React.Component {
 				)} />
 
 				<Route path="/search" render={() => (
-					<SearchResults searchQuery={ searchQuery } toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } handleMoveBook={ this.handleMoveBook } />
+					<SearchResults searchQuery={ searchQuery } toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } unregisterSearchInputHook={ this.unregisterSearchInputHook } handleMoveBook={ this.handleMoveBook } />
 				)} />
 			</div>
 		);

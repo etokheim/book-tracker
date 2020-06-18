@@ -19,6 +19,7 @@ export default class SearchResults extends Component {
 	
 	componentWillUnmount() {
 		this.props.toggleSearch(false);
+		this.props.unregisterSearchInputHook(this.handleSearchInput);
 	}
 
 	handleSearchInput = async (query) => {
