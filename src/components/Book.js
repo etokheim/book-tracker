@@ -2,20 +2,35 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 export default class Book extends Component {
+	state = {
+		shelf: this.props.book.shelf
+	}
+
 	static propTypes = {
 		book: PropTypes.object.isRequired,
 		handleMoveBook: PropTypes.func.isRequired
 	}
 
+	handleMoveBookLocal = (event) => {
+		const { book, handleMoveBook } = this.props;
+		const shelf = event.target.value;
+
+		this.setState({
+			shelf
+		})
+
+		handleMoveBook(book, shelf);
+	}
+
 	render() {
-		const { book } = this.props;
+		const { book, shelf } = this.props;
 		return (
 			<li>
 				<div className="book">
 					<div className="book-top">
 						<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks ? book.imageLinks.thumbnail : ''}")` }} />
 						<div className="book-shelf-changer">
-							<select>
+							<select onChange={ this.handleMoveBookLocal } value={ shelf }>
 								<option value="move" disabled>Move to...</option>
 								<option value="currentlyReading">Currently Reading</option>
 								<option value="wantToRead">Want to Read</option>

@@ -47,6 +47,33 @@ class BooksApp extends React.Component {
 		});
 	}
 
+	handleMoveBook = (book, newShelf) => {
+		const { shelves } = this.state;
+		const newBook = book;
+
+		// Map over the shelves to find the book we are moving.
+		const filteredShelves = shelves.map( (shelf) => {
+			// Filter the books to remove the moved book
+			shelf.books = shelf.books.filter( book => book.id !== newBook.id)
+			return shelf;
+		});
+
+		// Find the shelf we should put the book in by name
+		const shelf = shelves.find( shelf => shelf.name === newShelf);
+
+		// Update the new book's knowledge of which shelf it's in
+		newBook.shelf = newShelf;
+
+		// Put the book in the new shelf
+		shelf.books.push(newBook);
+
+		this.setState({
+			shelves: filteredShelves
+		})
+
+		// TODO: Move the book on the server side as well
+	}
+
 	render() {
 		const { shelves } = this.state;
 		return (
@@ -60,7 +87,7 @@ class BooksApp extends React.Component {
 					<div className="list-books">
 						<div className="list-books-content">
 							{ shelves.map( (shelf) => (
-								<Bookshelf title={ shelf.name } books={ shelf.books } key={ shelf.name } />
+								<Bookshelf title={ shelf.name } books={ shelf.books } handleMoveBook={ this.handleMoveBook } key={ shelf.name } />
 							)) }
 						</div>
 						<div className="open-search">
