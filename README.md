@@ -37,3 +37,8 @@ Then do the following:
    npm start
    ```
    - This can also take a minute or two
+
+
+## Credits
+
+The backend server and starting template is made by Udacity. I've written all the React code and hooked the application up to the books API.
