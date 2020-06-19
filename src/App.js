@@ -121,10 +121,10 @@ class BooksApp extends React.Component {
 	}
 
 	render() {
-		const { shelves, showSearch, searchQuery, searchInputHooks } = this.state;
+		const { shelves, showSearch, searchInputHooks } = this.state;
 		return (
 			<div className="app">
-				<Header showSearch={ showSearch } handleSearchInput={ this.handleSearchInput } searchInputHooks={ searchInputHooks } />
+				<Header showSearch={ showSearch } searchInputHooks={ searchInputHooks } />
 				<Route exact path="/" render={() => (
 					<div className="list-books">
 						<div className="list-books-content">
@@ -141,7 +141,7 @@ class BooksApp extends React.Component {
 				)} />
 
 				<Route path="/search" render={() => (
-					<SearchResults searchQuery={ searchQuery } toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } unregisterSearchInputHook={ this.unregisterSearchInputHook } handleMoveBook={ this.handleMoveBook } shelves={ shelves } />
+					<SearchResults toggleSearch={ this.toggleSearch } registerSearchInputHook={ this.registerSearchInputHook } unregisterSearchInputHook={ this.unregisterSearchInputHook } handleMoveBook={ this.handleMoveBook } shelves={ shelves } />
 				)} />
 			</div>
 		);

@@ -7,9 +7,12 @@ export default class SearchResults extends Component {
 	state = {
 		searchResults: []
 	}
-
 	static propTypes = {
-		toggleSearch: PropTypes.func.isRequired
+		toggleSearch: PropTypes.func.isRequired,
+		registerSearchInputHook: PropTypes.func.isRequired,
+		unregisterSearchInputHook: PropTypes.func.isRequired,
+		handleMoveBook: PropTypes.func.isRequired,
+		shelves: PropTypes.array.isRequired
 	}
 
 	componentDidMount() {

@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 export default class Header extends Component {
+	static propTypes = {
+		showSearch: PropTypes.bool.isRequired,
+		searchInputHooks: PropTypes.array.isRequired
+	}
+	
 	handleSearchInputLocal = (event) => {
 		// Trigger all hooks listening for changes in the search input and
 		// give them the new input through the first parameter.
 		this.props.searchInputHooks.forEach(hook => {
 			hook(event.target.value);
 		});
-	}
-	
-	static propTypes = {
-		showSearch: PropTypes.bool.isRequired,
-		searchInputHooks: PropTypes.array.isRequired
 	}
 
 	render() {
