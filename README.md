@@ -1,6 +1,6 @@
-# MyReads Project
+# Book tracker Project
 
-This is the MyReads app. It's a simple app to keep track of which books you are currently reading, want to read and which you have already read.
+This is my Book tracker app. It's a simple app to keep track of which books you are currently reading, want to read and which you have already read.
 
 
 ## Future development
@@ -14,7 +14,7 @@ I'm thinking of adding a few new features:
 
 ## Development environment
 
-To get the app up and running for development environments you need to have `git`, `nodejs` and `npm` installed and running.
+To get the app up and running for development environments you need to have `git`, `nodejs` and `npm` installed.
 
 Then do the following:
 
@@ -25,7 +25,7 @@ Then do the following:
    - You can get the url from the top right corner (`Clone or download 🔽`)
 2. Navigate into the cloned project:
    ```sh
-   cd reactnd-project-myreads-starter
+   cd book-tracker
    ```
 3. Install the dependencies:
     ```sh

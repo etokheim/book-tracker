@@ -1,6 +1,6 @@
 {
-  "name": "myreads-app",
-  "version": "0.1.0",
+  "name": "book-tracker",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "prop-types": "^15.7.2",

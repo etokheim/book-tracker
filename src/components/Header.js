@@ -42,7 +42,7 @@ export default class Header extends Component {
 					</header>
 				) : (
 					<header className="list-books-title">
-						<h1>MyReads</h1>
+						<h1>Book Tracker</h1>
 					</header>
 				)}
 			</>
