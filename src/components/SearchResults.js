@@ -23,6 +23,7 @@ export default class SearchResults extends Component {
 	}
 
 	handleSearchInput = async (query) => {
+		const { shelves } = this.props;
 		let searchResults = await booksApi.search(query);
 
 		// The API returns nothing when it receives an empty query...
@@ -38,6 +39,19 @@ export default class SearchResults extends Component {
 			searchResults = [];
 		}
 
+		// Check if any of the organized books appears in the search results. If they do, we'll tell them which
+		// shelf they are placed in.
+		const books = shelves.map( shelf => shelf.books ).flat();
+		
+		// We get every book using the map function, and the utilize the find function to find matches, as
+		// find stops looping after the first match.
+		books.map( book => searchResults.find(searchResult => {
+			if(searchResult.id === book.id) {
+				searchResult.shelf = book.shelf;
+			}
+			return searchResult;
+		}))
+		
 		this.setState({
 			searchResults
 		})
