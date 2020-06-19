@@ -28,7 +28,7 @@ export default class SearchResults extends Component {
 		// The API returns nothing when it receives an empty query...
 		if(!searchResults) {
 			console.error("Something went wrong with the API. It returned nothing.");
-			return;
+			searchResults = [];
 		}
 
 		// Handle server errors
