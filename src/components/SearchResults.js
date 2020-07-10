@@ -7,6 +7,7 @@ export default class SearchResults extends Component {
 	state = {
 		searchResults: []
 	}
+
 	static propTypes = {
 		toggleSearch: PropTypes.func.isRequired,
 		registerSearchInputHook: PropTypes.func.isRequired,
@@ -42,19 +43,30 @@ export default class SearchResults extends Component {
 			searchResults = [];
 		}
 
-		// Check if any of the organized books appears in the search results. If they do, we'll tell them which
-		// shelf they are placed in.
+		/*
+			Check if any of the organized books appears in the search results. If they do, we'll tell them which
+			shelf they are placed in.
+		*/
+		// Get all local books
 		const books = shelves.map( shelf => shelf.books ).flat();
 		
-		// We get every book using the map function, and the utilize the find function to find matches, as
-		// find stops looping after the first match.
-		books.map( book => searchResults.find(searchResult => {
-			if(searchResult.id === book.id) {
-				searchResult.shelf = book.shelf;
+		// For every searchResult, check if it is in the local book array
+		// If it is, assign it to the same shelf
+		for (let i = 0; i < searchResults.length; i++) {
+			const result = searchResults[i];
+			
+			for (let j = 0; j < books.length; j++) {
+				const book = books[j];
+				
+				if(book.id === result.id) {
+					// Assign the searchResult to the same shelf as the local book
+					result.shelf = book.shelf
+				}
 			}
-			return searchResult;
-		}))
-		
+		}
+
+
+		// Set the state
 		this.setState({
 			searchResults
 		})
