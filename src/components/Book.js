@@ -30,7 +30,7 @@ export default class Book extends Component {
 					<div className="book-top">
 						<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url("${book.imageLinks ? book.imageLinks.thumbnail : ''}")` }} />
 						<div className="book-shelf-changer">
-							<select onChange={ this.handleMoveBookLocal } value={ book.shelf || "move" }>
+							<select onChange={ this.handleMoveBookLocal } value={ book.shelf || "none" }>
 								<option value="move" disabled>Move to...</option>
 								<option value="currentlyReading" disabled={ book.shelf === "currentlyReading" ? true : false }>Currently Reading</option>
 								<option value="wantToRead" disabled={ book.shelf === "wantToRead" ? true : false }>Want to Read</option>
